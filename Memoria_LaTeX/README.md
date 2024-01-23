@@ -22,4 +22,8 @@ Después, aún no compilará, tendrás que abrir MiKTeX Console y darle a search
 
 Por último, antes de compilar, añade lo siguiente en la configuración de TeXstudio (Opciones->Configurar TeXstudio)
 
+```
+pdflatex.exe -synctex=1 -interaction=nonstopmode %.tex -aux-directory=tmp %.tex
+```
+
 ![](README/Config.png)

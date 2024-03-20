@@ -71,6 +71,8 @@ RUN tesseract -v
 
 #Register all fonts in folder fonts
 COPY ./fonts/ /usr/local/share/fonts
+RUN mkdir /home/trainingFont
+COPY ./trainingFont /home/trainingFont
 RUN fc-cache -f -v
 
 RUN echo 'alias ls="ls -l --color=auto"' >> ~/.bashrc

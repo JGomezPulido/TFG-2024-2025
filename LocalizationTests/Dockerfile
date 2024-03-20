@@ -10,24 +10,25 @@ ENV REPOS_PATH  /home/tesseract_repos
 # install build dependencies 
 RUN apt-get update && apt-get install -y g++ rsync zip openssh-server make gdb
 RUN apt-get install bc 
-RUN apt-get install build-essential
+RUN apt-get install build-essential -y
 RUN apt install unzip
 #Tesseract dependencies
 RUN apt-get install g++ # or clang++ (presumably) -y
 RUN apt-get install autoconf automake libtool -y
 RUN apt-get install pkg-config -y
 RUN apt-get install libpng-dev -y
-RUN apt-get install libjpeg62-turbo-dev -y
+RUN apt-get install libjpeg62-dev -y
 RUN apt-get install libtiff5-dev -y
 RUN apt-get install zlib1g-dev -y
 RUN apt-get install libicu-dev -y
 RUN apt-get install libpango1.0-dev -y
 RUN apt-get install libcairo2-dev -y 
 RUN apt-get install libleptonica-dev -y
+Run apt-get install git -y
 
 #Python libraries 
-RUN apt-get install python3.11.2
-RUN apt-get install python3-pip
+RUN apt-get install python3.11 python3.11-dev -y
+RUN apt-get install python3-pip -y
 RUN pip install --upgrade pip
 RUN pip install -U scikit-learn
 

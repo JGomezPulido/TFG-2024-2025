@@ -5,7 +5,7 @@ docker build -t localizationtests .
 docker run -p 5000:22 -i -t localizationtests /bin/bash
 
 #          crea un volumen en el directorio actual /volu     nombre del contenedor 
-docker run -v %cd%/volumen:/home/volumen --name testing -p 5000:22 -i -t localizationtests /bin/bash
+docker run -v %cd%/volumen:/home/localizationtests/volumen --name testing -p 5000:22 -i -t localizationtests /bin/bash
 
 service ssh start 
 useradd -m -d /home/localizationtests -s /bin/bash -G sudo localizationtests

@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 
 LABEL description="Container for use with Visual Studio" 
 
-ENV USERNAME LocalizationTests
+ENV USERNAME localizationtests
 ENV TESTDIR /home/${USERNAME}
 ENV REPOS_PATH  /home/tesseract_repos
 
@@ -88,6 +88,6 @@ RUN echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config && \
 # expose port 22 
 EXPOSE 22
 
-# RUN useradd -m -d ${TESTDIR} -s /bin/bash -G sudo ${USERNAME}
+RUN useradd -m -d ${TESTDIR} -s /bin/bash -G sudo ${USERNAME}
 
 

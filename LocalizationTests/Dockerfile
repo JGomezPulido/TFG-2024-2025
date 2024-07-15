@@ -1,5 +1,5 @@
 # our local base image
-FROM ubuntu 
+FROM ubuntu:22.04
 
 LABEL description="Container for use with Visual Studio" 
 

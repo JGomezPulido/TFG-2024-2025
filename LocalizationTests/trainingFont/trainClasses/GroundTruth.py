@@ -18,7 +18,8 @@ class GroundTruth():
         self.textLimit_ = limit
 
     def create(self, language, font_Name):
-
+        f_name = font_Name
+        font_Name = font_Name.replace(" ","")
         training_text_file = f'{self.textPath_}/{language}.training_text'
 
         #Array with training lines data
@@ -71,7 +72,7 @@ class GroundTruth():
 
             subprocess.run([
                 'text2image',
-                f'--font={font_Name}',
+                f'--font={f_name}',
                 f'--text={line_training_text}',
                 f'--outputbase={output_directory}/{file_base_name}',
                 '--max_pages=10',

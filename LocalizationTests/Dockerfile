@@ -10,6 +10,7 @@ ENV REPOS_PATH  /home/tesseract_repos
 # install build dependencies 
 RUN apt-get update && apt-get install -y g++ rsync zip openssh-server make gdb
 RUN apt-get install bc 
+RUN apt-get install -y sudo
 RUN apt-get install build-essential -y
 RUN apt install unzip
 #Tesseract dependencies
@@ -89,5 +90,7 @@ RUN echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config && \
 EXPOSE 22
 
 RUN useradd -m -d ${TESTDIR} -s /bin/bash -G sudo ${USERNAME}
+RUN usermod -aG sudo ${USERNAME}
+RUN echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 

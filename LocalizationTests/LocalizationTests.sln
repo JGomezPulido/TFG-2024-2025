@@ -4,8 +4,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LocalizationTests", "projects\LocalizationTestsApp\LocalizationTests.vcxproj", "{05A46D20-F8AE-4545-9D30-2198BFB392FC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE} = {AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestCases", "projects\TestCases\TestCases.vcxproj", "{567F12F8-6449-40E8-8D50-CE3834121D51}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OCR", "projects\OCR\OCR.vcxproj", "{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +72,30 @@ Global
 		{567F12F8-6449-40E8-8D50-CE3834121D51}.Release|x86.ActiveCfg = Release|x86
 		{567F12F8-6449-40E8-8D50-CE3834121D51}.Release|x86.Build.0 = Release|x86
 		{567F12F8-6449-40E8-8D50-CE3834121D51}.Release|x86.Deploy.0 = Release|x86
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Debug|ARM.ActiveCfg = Debug|ARM
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Debug|ARM.Build.0 = Debug|ARM
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Debug|ARM.Deploy.0 = Debug|ARM
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Debug|ARM64.Build.0 = Debug|ARM64
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Debug|x64.ActiveCfg = Debug|x64
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Debug|x64.Build.0 = Debug|x64
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Debug|x64.Deploy.0 = Debug|x64
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Debug|x86.ActiveCfg = Debug|x86
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Debug|x86.Build.0 = Debug|x86
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Debug|x86.Deploy.0 = Debug|x86
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Release|ARM.ActiveCfg = Release|ARM
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Release|ARM.Build.0 = Release|ARM
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Release|ARM.Deploy.0 = Release|ARM
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Release|ARM64.ActiveCfg = Release|ARM64
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Release|ARM64.Build.0 = Release|ARM64
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Release|ARM64.Deploy.0 = Release|ARM64
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Release|x64.ActiveCfg = Release|x64
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Release|x64.Build.0 = Release|x64
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Release|x64.Deploy.0 = Release|x64
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Release|x86.ActiveCfg = Release|x86
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Release|x86.Build.0 = Release|x86
+		{AE18F8BE-BBB1-4050-A8FA-D0A86A7BC9BE}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

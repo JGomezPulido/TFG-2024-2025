@@ -35,6 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\LocalizationTestsApp\LocalizationTests.cpp" />
     <ClCompile Include="..\..\src\LocalizationTestsApp\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +45,9 @@
     <ProjectReference Include="..\TestCases\TestCases.vcxproj">
       <Project>{567f12f8-6449-40e8-8d50-ce3834121d51}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\LocalizationTestsApp\LocalizationTests.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{05a46d20-f8ae-4545-9d30-2198bfb392fc}</ProjectGuid>

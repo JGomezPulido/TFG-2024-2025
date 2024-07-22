@@ -1,21 +1,17 @@
 ﻿#include <iostream>
 #include <string>
 #include "Tesseract.h"
-#include "TestsAssert.h"
 #include "BadlyImplemented.h"
-int main(void) {
-	PlaceholderVector placeholders = PlaceholderVector();
-	placeholders.push_back({ '{','}' });
-	BadlyImplemented tests = BadlyImplemented(placeholders);
-	tests.test("Hola de buenas");
-	tests.test("Hola {name}, que tal est�s {laugh}");
-	tests.test("Hola {name{player1}}");
-	return 0;
+#include "LocalizationTests.h"
+int main(int argc, char *argv[]) {
 
-	//Tesseract tess = Tesseract();
-	//
-	////if (tess.trainModel("spa", "Courier Prime", 1000)) {
-	////	std::cout << "YES\n";
-	////}else std::cout << "NO\n";
-	//tess.getText("/home/images", "Courier Prime");
+	LocalizationTests tests;
+	std::vector<std::string> args(argc);
+	for (int i = 0; i < argc; i++) {
+		args[i] = std::string(argv[i]);
+	}
+	if (!tests.init(args)) return 1;
+	tests.run();
+
+	return 0;
 }

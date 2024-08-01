@@ -6,6 +6,8 @@ LABEL description="Container for use with Visual Studio"
 ENV USERNAME localizationtests
 ENV TESTDIR /home/${USERNAME}
 ENV REPOS_PATH  /home/tesseract_repos
+ENV NUSPELL /home/nuspell
+ENV CV2 /home/opencv
 
 # install build dependencies 
 RUN apt-get update && apt-get install -y g++ rsync zip openssh-server make gdb
@@ -15,6 +17,7 @@ RUN apt-get install build-essential -y
 RUN apt install unzip
 #Tesseract dependencies
 RUN apt-get install g++ # or clang++ (presumably) -y
+RUN apt-get install cmake -y
 RUN apt-get install autoconf automake libtool -y
 RUN apt-get install pkg-config -y
 RUN apt-get install libpng-dev -y
@@ -25,7 +28,35 @@ RUN apt-get install libicu-dev -y
 RUN apt-get install libpango1.0-dev -y
 RUN apt-get install libcairo2-dev -y 
 RUN apt-get install libleptonica-dev -y
-Run apt-get install git -y
+RUN apt-get install nlohmann-json3-dev -y
+RUN apt-get install catch2 pandoc -y
+RUN apt-get install libtesseract-dev -y
+RUN apt-get install git -y
+
+#install nuspell
+RUN mkdir $NUSPELL
+RUN git clone https://github.com/nuspell/nuspell $NUSPELL
+WORKDIR $NUSPELL
+RUN cd $NUSPELL
+RUN mkdir build
+WORKDIR $NUSPELL/build 
+RUN cd $NUSPELL/build
+RUN cmake ..
+RUN make -j
+RUN sudo make install 
+
+#install cv2
+RUN mkdir $CV2
+RUN git clone https://github.com/opencv/opencv $CV2
+WORKDIR $CV2
+RUN cd $CV2
+RUN git checkout 4.x
+RUN mkdir -p build 
+WORKDIR $CV2/build 
+RUN cd $CV2/build
+RUN cmake ..
+RUN make -j4
+RUN sudo make install
 
 #Python libraries 
 RUN apt-get install python3.11 python3.11-dev -y

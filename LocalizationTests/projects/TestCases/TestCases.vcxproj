@@ -68,7 +68,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <RemoteRootDir>~/localizationtests</RemoteRootDir>
+    <RemoteRootDir>~</RemoteRootDir>
+    <RemoteProjectRelDir />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -107,6 +108,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(ProjectDir)lib\</OutDir>
     <TargetName>lib$(ProjectName)_d</TargetName>
+    <RemoteOutRelDir>$(RemoteProjectRelDir)/lib/</RemoteOutRelDir>
+    <RemoteDeployDir>$(RemoteRootDir)</RemoteDeployDir>
+    <RemoteIntRelDir>$(RemoteProjectRelDir)/obj/$(ProjectName)/$(Platform)/$(Configuration)</RemoteIntRelDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)lib\</OutDir>

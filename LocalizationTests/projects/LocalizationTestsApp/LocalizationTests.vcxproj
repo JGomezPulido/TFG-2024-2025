@@ -83,8 +83,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>Application</ConfigurationType>
-    <RemoteRootDir>~/localizationtests</RemoteRootDir>
+    <RemoteRootDir>~</RemoteRootDir>
     <UseCompiler>true</UseCompiler>
+    <RemoteProjectRelDir />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -111,6 +112,8 @@
     <OutDir>$(ProjectDir)bin\</OutDir>
     <TargetName>$(ProjectName)_d</TargetName>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/bin/</RemoteOutRelDir>
+    <RemoteDeployDir>$(RemoteRootDir)</RemoteDeployDir>
+    <RemoteIntRelDir>$(RemoteProjectRelDir)/obj/$(ProjectName)/$(Platform)/$(Configuration)</RemoteIntRelDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)bin\</OutDir>
@@ -138,7 +141,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(RemoteRootDir)/OCR/src/OCR;$(RemoteRootDir)/TestCases/src/TestCases;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\OCR;$(SolutionDir)src\TestCases;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

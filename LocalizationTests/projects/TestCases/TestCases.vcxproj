@@ -124,11 +124,13 @@
   </PropertyGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\TestCases\BadlyImplemented.h" />
+    <ClInclude Include="..\..\src\TestCases\Overlap.h" />
     <ClInclude Include="..\..\src\TestCases\TestsAssert.h" />
     <ClInclude Include="..\..\src\TestCases\TestCase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\TestCases\BadlyImplemented.cpp" />
+    <ClCompile Include="..\..\src\TestCases\Overlap.cpp" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Lib />
@@ -157,13 +159,15 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Lib />
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)src/TestCases/;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src/TestCases/;/usr/include/tesseract;/usr/include/leptonica;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-llept -ltesseract %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Lib />
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)src/TestCases/;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src/TestCases/;/usr/include/tesseract;/usr/include/leptonica;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-llept -ltesseract %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">

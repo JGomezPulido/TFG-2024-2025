@@ -31,6 +31,8 @@ RUN apt-get install libleptonica-dev -y
 RUN apt-get install nlohmann-json3-dev -y
 RUN apt-get install catch2 pandoc -y
 RUN apt-get install libtesseract-dev -y
+RUN apt-get install tesseract-ocr -y
+RUN apt-get install -y tesseract-ocr-spa
 RUN apt-get install git -y
 
 #install nuspell
@@ -44,19 +46,6 @@ RUN cd $NUSPELL/build
 RUN cmake ..
 RUN make -j
 RUN sudo make install 
-
-#install cv2
-RUN mkdir $CV2
-RUN git clone https://github.com/opencv/opencv $CV2
-WORKDIR $CV2
-RUN cd $CV2
-RUN git checkout 4.x
-RUN mkdir -p build 
-WORKDIR $CV2/build 
-RUN cd $CV2/build
-RUN cmake ..
-RUN make -j4
-RUN sudo make install
 
 #Python libraries 
 RUN apt-get install python3.11 python3.11-dev -y

@@ -33,12 +33,17 @@ bool Tesseract::getText(std::string imgPath ,std::string model)
         // Muestra un mensaje de error si el directorio no se puede abrir
         std::cerr << "No se pudo abrir el directorio: " << imgPath << std::endl;
     }
-    
+    //const char* output_file = "output.log";
     for (int i = 0; i < pngFiles.size(); i++) {
         std::string command = "sudo tesseract " + imgPath + "/" + pngFiles[i] + " " + imgPath + "/" + pngFiles[i] + " --tessdata-dir " + tessdatadir + " -l " + model;
-        std::cout << command << std::endl;
+        //std::string command = "sudo tesseract " + imgPath + "/" + pngFiles[i] + " stdout --tessdata-dir " + tessdatadir + " -l " + model +" > " + std::string(output_file);
         system(command.c_str());
+        //std::ifstream output_stream(output_file);
+        //std::string output_message((std::istreambuf_iterator<char>(output_stream)), std::istreambuf_iterator<char>());
+        //output_stream.close();
+        //std::cout << output_message << std::endl;
     }
+    //std::remove(output_file);
     return false;
 }
 bool Tesseract::trainModel(std::string lan, std::string font, int iteration, bool clear)
@@ -91,8 +96,8 @@ bool Tesseract::train(std::string lan, std::string font, int iteration ,bool cle
     //Se elimina el log temporal y se escribe la salida
     std::remove(output_file);
     std::remove(error_file);
-    //std::cout << output_message << std::endl;
-    //std::cout << error_message << std::endl;
+    /*std::cout << output_message << std::endl;
+    std::cout << error_message << std::endl;*/
 
     //Error de fuente
     for (const auto& indicator : errorIndicators) {
@@ -135,8 +140,8 @@ bool Tesseract::generateGT(std::string lan, std::string font)
     //Se elimina el log temporal y se escribe la salida
     std::remove(output_file);
     std::remove(error_file);
-    /*std::cout << output_message << std::endl;
-    std::cout << error_message << std::endl;*/
+    std::cout << output_message << std::endl;
+    std::cout << error_message << std::endl;
 
     //Error de fuente
     for (const auto& indicator : errorIndicators) {

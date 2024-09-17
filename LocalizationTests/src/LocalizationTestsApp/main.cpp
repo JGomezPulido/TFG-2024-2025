@@ -16,11 +16,14 @@ int main(int argc, char *argv[]) {
 	tests.run();*/
 
 	Overlap test = Overlap();
-	if (!test.Init()) {
-	std::cout << "fallo Init" << std::endl;
+	if (!test.Init("Overlay_Correct2.png")) {
+	std::cout << "fallo test" << std::endl;
 	}
+	if (test.checkOverlap("a"))std::cout << "OVERLAP!!!!" << std::endl;
+	else std::cout << "EVERYTHING OK" << std::endl;
 
-
+	/*Tesseract tess = Tesseract();
+	tess.trainModel("spa", "Courier Prime", 1000);*/
 
 	return 0;
 }

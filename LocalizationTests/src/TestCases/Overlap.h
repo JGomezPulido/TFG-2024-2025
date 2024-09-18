@@ -27,7 +27,7 @@ public:
 	Overlap();
 	~Overlap();
 	void test(const std::string& testString) override;
-	bool checkOverlap(std::string imageUrl);
+	bool checkOverlap(ButtonLimits lim);
 	bool Init(std::string imageUrl);
 private:
 	std::vector<ButtonLimits> _buttons;

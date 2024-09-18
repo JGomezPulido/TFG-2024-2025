@@ -20,12 +20,12 @@ void Overlap::test(const std::string& testString)
 
 }
 
-bool Overlap::checkOverlap(std::string imageUrl)
+bool Overlap::checkOverlap(ButtonLimits lim)
 {
-	int btnX=65;
-	int btnY=67;
-	int btnW=337;
-	int btnH=144;
+	int btnX = lim.x;
+	int btnY=lim.y;
+	int btnW=lim.w;
+	int btnH=lim.h;
 	// Limites del boton
 	int btnRight = btnX + btnW;
 	int btnBottom = btnY + btnH;
@@ -38,20 +38,6 @@ bool Overlap::checkOverlap(std::string imageUrl)
 	}
 	return false;  // El bounding box está dentro de los límites
 }
-
-//bool Overlap::checkOverlap(std::vector<ButtonLimits> boxes)
-//{
-//	for (ButtonLimits box : boxes) {
-//		if (box.x < _buttons[0].x ||
-//			box.x + box.w > _buttons[0].x + _buttons[0].w ||
-//			box.y < _buttons[0].y ||
-//			box.y + box.h > _buttons[0].y + _buttons[0].h) 
-//		{
-//			return true;
-//		}
-//	}
-//	return false;
-//}
 
 bool Overlap::Init(std::string imageUrl)
 {

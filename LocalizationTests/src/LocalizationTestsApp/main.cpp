@@ -15,11 +15,18 @@ int main(int argc, char *argv[]) {
 	if (!tests.init(args)) return 1;
 	tests.run();*/
 
-	Overlap test = Overlap();
-	if (!test.Init("Overlay_Correct2.png")) {
+	Overlap testCorrect = Overlap();
+	if (!testCorrect.Init("Overlay_Correct2.png")) {
 	std::cout << "fallo test" << std::endl;
 	}
-	if (test.checkOverlap("a"))std::cout << "OVERLAP!!!!" << std::endl;
+	if (testCorrect.checkOverlap({65,67,337,144}))std::cout << "OVERLAP!!!!" << std::endl;
+	else std::cout << "EVERYTHING OK" << std::endl;
+
+	Overlap testFail = Overlap();
+	if (!testFail.Init("Overlay_Fail.png")) {
+		std::cout << "fallo test" << std::endl;
+	}
+	if (testFail.checkOverlap({ 65,67,337,144 }))std::cout << "OVERLAP!!!!" << std::endl;
 	else std::cout << "EVERYTHING OK" << std::endl;
 
 	/*Tesseract tess = Tesseract();

@@ -54,20 +54,30 @@ bool Overlap::Init(std::string imageUrl)
 		return false;
 	}
 	_ocr->SetImage(image);
-	_ocr->Recognize(0);
+	int result = _ocr->Recognize(0);
+	if (result != 0) {
+		std::cout << "Recognition failed with error code: " << result << std::endl;
+		return false;
+	}
 	tesseract::ResultIterator* ri = _ocr->GetIterator();
 	tesseract::PageIteratorLevel level = tesseract::RIL_WORD;
 	if (ri != nullptr) {
-		do {
-			const char* word = ri->GetUTF8Text(level);
+		const char* word = ri->GetUTF8Text(level);
+		while (word != nullptr) {
 			float conf = ri->Confidence(level);
 			int x1, y1, x2, y2;
 			ri->BoundingBox(level, &x1, &y1, &x2, &y2);
 			std::cout << "Word: '" << word << "' at (" << x1 << ", " << y1 << ") -> ("
 				<< x2 << ", " << y2 << "), Confidence: " << conf << "\n";
-			_boxes.push_back({ x1,y1,x2,y2 });
+			_boxes.push_back({ x1, y1, x2, y2 });
 			delete[] word;
-		} while (ri->Next(level));
+
+			// Avanza al siguiente nivel de iteración
+			if (!ri->Next(level)) {
+				break;
+			}
+			word = ri->GetUTF8Text(level);
+		}
 	}
 	pixDestroy(&image);
 	return true;

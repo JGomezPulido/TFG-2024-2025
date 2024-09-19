@@ -124,12 +124,14 @@
   </PropertyGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\TestCases\BadlyImplemented.h" />
+    <ClInclude Include="..\..\src\TestCases\FontIssue.h" />
     <ClInclude Include="..\..\src\TestCases\Overlap.h" />
     <ClInclude Include="..\..\src\TestCases\TestsAssert.h" />
     <ClInclude Include="..\..\src\TestCases\TestCase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\TestCases\BadlyImplemented.cpp" />
+    <ClCompile Include="..\..\src\TestCases\FontIssue.cpp" />
     <ClCompile Include="..\..\src\TestCases\Overlap.cpp" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -159,7 +161,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Lib />
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)src/TestCases/;/usr/include/tesseract;/usr/include/leptonica;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(RemoteRootDir)/TestCases;/usr/include/tesseract;/usr/include/leptonica;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-llept -ltesseract %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>

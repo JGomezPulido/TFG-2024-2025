@@ -47,6 +47,19 @@ RUN cmake ..
 RUN make -j
 RUN sudo make install 
 
+#install cv2
+RUN mkdir $CV2
+RUN git clone https://github.com/opencv/opencv $CV2
+WORKDIR $CV2
+RUN cd $CV2
+RUN git checkout 4.x
+RUN mkdir -p build 
+WORKDIR $CV2/build 
+RUN cd $CV2/build
+RUN cmake ..
+RUN make -j4
+RUN sudo make install
+
 #Python libraries 
 RUN apt-get install python3.11 python3.11-dev -y
 RUN apt-get install python3-pip -y

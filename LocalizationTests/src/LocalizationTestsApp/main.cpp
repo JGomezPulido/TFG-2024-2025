@@ -30,10 +30,11 @@ int main(int argc, char *argv[]) {
 	if (testFail.checkOverlap({ 65,67,337,144 }))std::cout << "OVERLAP!!!!" << std::endl;
 	else std::cout << "EVERYTHING OK" << std::endl;
 
-	FontIssue font("Àvila es una ciudad");
-	font.test("Eavila es una ciudad");
-	/*Tesseract tess = Tesseract();
-	tess.trainModel("spa", "Courier Prime", 1000);*/
+	//FontIssue font("Àvila es una ciudad");
+	//font.test("Eavila es una ciudad");
+
+	Tesseract tess = Tesseract();
+	tess.trainModel("spa", "Courier Prime", 1000);
 
 	return 0;
 }

@@ -2,8 +2,9 @@
 
 #include <fstream>
 #include <iostream>
-#include <tesseract/baseapi.h>
 #include <leptonica/allheaders.h>
+#include <opencv2/opencv.hpp>
+#include <tesseract/baseapi.h>
 
 Overlap::Overlap()
 {
@@ -81,4 +82,43 @@ bool Overlap::Init(std::string imageUrl)
 	}
 	pixDestroy(&image);
 	return true;
+}
+
+void Overlap::getButtons()
+{
+	//Mat imagen = imread("ruta/a/imagen.jpg");
+
+	//if (imagen.empty()) {
+	//	cout << "No se pudo cargar la imagen." << endl;
+	//	return -1;
+	//}
+
+	//// Convertir a escala de grises
+	//Mat gris;
+	//cvtColor(imagen, gris, COLOR_BGR2GRAY);
+
+	//// Aplicar el detector de bordes
+	//Mat bordes;
+	//Canny(gris, bordes, 100, 200);
+
+	//// Encontrar contornos
+	//vector<vector<Point>> contornos;
+	//findContours(bordes, contornos, RETR_TREE, CHAIN_APPROX_SIMPLE);
+
+	//// Dibujar los contornos que podrían ser botones
+	//for (size_t i = 0; i < contornos.size(); i++) {
+	//	vector<Point> aprox;
+	//	approxPolyDP(contornos[i], aprox, arcLength(contornos[i], true) * 0.02, true);
+
+	//	if (aprox.size() == 4) { // Consideramos que un botón podría ser rectangular
+	//		Rect rect = boundingRect(aprox);
+	//		rectangle(imagen, rect, Scalar(0, 255, 0), 2);  // Dibujar el rectángulo alrededor del botón
+	//		cout << "Coordenadas del botón: " << rect.x << ", " << rect.y
+	//			<< ", ancho: " << rect.width << ", alto: " << rect.height << endl;
+	//	}
+	//}
+
+	//// Mostrar la imagen con el botón detectado
+	//imshow("Imagen con el botón detectado", imagen);
+	//waitKey(0);
 }

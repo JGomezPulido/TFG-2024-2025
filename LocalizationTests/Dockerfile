@@ -28,6 +28,13 @@ RUN apt-get install libicu-dev -y
 RUN apt-get install libpango1.0-dev -y
 RUN apt-get install libcairo2-dev -y 
 RUN apt-get install libleptonica-dev -y
+RUN apt-get install libgtk2.0-dev -y
+RUN apt-get install libavcodec-dev -y
+RUN apt-get install libavformat-dev -y
+RUN apt-get install libswscale-dev -y
+RUN apt-get install libv4l-dev -y
+RUN apt-get install libatlas-base-dev -y
+RUN apt-get install gfortran -y
 RUN apt-get install nlohmann-json3-dev -y
 RUN apt-get install catch2 pandoc -y
 RUN apt-get install libtesseract-dev -y
@@ -59,7 +66,7 @@ RUN mkdir -p build
 WORKDIR $CV2/build 
 RUN cd $CV2/build
 RUN cmake ..
-RUN make -j4
+RUN make -j8
 RUN sudo make install
 
 #Python libraries 
@@ -128,4 +135,4 @@ RUN useradd -m -d ${TESTDIR} -s /bin/bash -G sudo ${USERNAME}
 RUN usermod -aG sudo ${USERNAME}
 RUN echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*

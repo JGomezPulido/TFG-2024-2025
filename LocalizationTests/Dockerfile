@@ -34,7 +34,9 @@ RUN apt-get install libtesseract-dev -y
 RUN apt-get install tesseract-ocr -y
 RUN apt-get install -y tesseract-ocr-spa
 RUN apt-get install git -y
-
+RUN apt-get install hunspell-es -y
+RUN apt-get install hunspell-en-us -y
+RUN apt-get install hunspell-en-gb -y
 #install nuspell
 RUN mkdir $NUSPELL
 RUN git clone https://github.com/nuspell/nuspell $NUSPELL

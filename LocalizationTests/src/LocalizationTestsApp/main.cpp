@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 	if (!tests.init(args)) return 1;
 	tests.run();*/
 
-	Overlap testCorrect = Overlap();
+	/*Overlap testCorrect = Overlap();
 	if (!testCorrect.Init("C.png")) {
 	std::cout << "fallo test" << std::endl;
 	}
@@ -31,13 +31,13 @@ int main(int argc, char *argv[]) {
 	}
 	testFail.getButtons();
 	if (testFail.checkOverlap())std::cout << "OVERLAP!!!!" << std::endl;
-	else std::cout << "EVERYTHING OK" << std::endl;
+	else std::cout << "EVERYTHING OK" << std::endl;*/
 
 	//FontIssue font("Àvila es una ciudad");
 	//font.test("Eavila es una ciudad");
 
-	/*Tesseract tess = Tesseract();
-	tess.trainModel("spa", "Courier Prime", 1000);*/
+	Tesseract tess = Tesseract();
+	tess.trainModel("eng", "Courier Prime", 1000);
 
 	return 0;
 }

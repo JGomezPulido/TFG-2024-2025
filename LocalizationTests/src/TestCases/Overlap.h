@@ -27,12 +27,13 @@ public:
 	Overlap();
 	~Overlap();
 	void test(const std::string& testString) override;
-	bool checkOverlap(ButtonLimits lim);
+	bool checkOverlap();
 	bool Init(std::string imageUrl);
-	void getButtons();
+	bool getButtons();
 private:
 	std::vector<ButtonLimits> _buttons;
 	std::vector<BoudingBox>_boxes;
 	tesseract::TessBaseAPI* _ocr = nullptr;
+	std::string _imageUrl;
 };
 #endif

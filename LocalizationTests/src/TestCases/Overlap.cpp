@@ -5,7 +5,8 @@
 #include <leptonica/allheaders.h>
 #include <opencv2/opencv.hpp>
 #include <tesseract/baseapi.h>
-
+using namespace cv;
+using namespace std;
 Overlap::Overlap()
 {
 	
@@ -21,20 +22,22 @@ void Overlap::test(const std::string& testString)
 
 }
 
-bool Overlap::checkOverlap(ButtonLimits lim)
+bool Overlap::checkOverlap()
 {
-	int btnX = lim.x;
-	int btnY=lim.y;
-	int btnW=lim.w;
-	int btnH=lim.h;
-	// Limites del boton
-	int btnRight = btnX + btnW;
-	int btnBottom = btnY + btnH;
+	for (int j = 0; j < _buttons.size(); j++) {
+		int btnX = _buttons[j].x;
+		int btnY = _buttons[j].y;
+		int btnW = _buttons[j].w;
+		int btnH = _buttons[j].h;
+		// Limites del boton
+		int btnRight = btnX + btnW;
+		int btnBottom = btnY + btnH;
 
-	// Verificar si el bounding box se sale de los límites del botón
-	for (int i = 0;i < _boxes.size();i++) {
-		if (_boxes[i].x < btnX || _boxes[i].x2 > btnRight || _boxes[i].y < btnY || _boxes[i].y2 > btnBottom) {
-			return true;  // El bounding box se sale de los límites
+		// Verificar si el bounding box se sale de los límites del botón
+		for (int i = 0; i < _boxes.size(); i++) {
+			if (_boxes[i].x < btnX || _boxes[i].x2 > btnRight || _boxes[i].y < btnY || _boxes[i].y2 > btnBottom) {
+				return true;  // El bounding box se sale de los límites
+			}
 		}
 	}
 	return false;  // El bounding box está dentro de los límites
@@ -42,6 +45,7 @@ bool Overlap::checkOverlap(ButtonLimits lim)
 
 bool Overlap::Init(std::string imageUrl)
 {
+	_imageUrl = imageUrl;
 	//Esto tiene que ir en tesseract
 	_ocr = new tesseract::TessBaseAPI();
 	if (_ocr->Init("/home/trainingFont/trainedModel", "CourierPrime")) {
@@ -61,7 +65,7 @@ bool Overlap::Init(std::string imageUrl)
 		return false;
 	}
 	tesseract::ResultIterator* ri = _ocr->GetIterator();
-	tesseract::PageIteratorLevel level = tesseract::RIL_WORD;
+	tesseract::PageIteratorLevel level = tesseract::RIL_TEXTLINE;
 	if (ri != nullptr) {
 		const char* word = ri->GetUTF8Text(level);
 		while (word != nullptr) {
@@ -84,41 +88,38 @@ bool Overlap::Init(std::string imageUrl)
 	return true;
 }
 
-void Overlap::getButtons()
+bool Overlap::getButtons()
 {
-	//Mat imagen = imread("ruta/a/imagen.jpg");
+	Mat imagen = imread(_imageUrl);
 
-	//if (imagen.empty()) {
-	//	cout << "No se pudo cargar la imagen." << endl;
-	//	return -1;
-	//}
+	if (imagen.empty()) {
+		cout << "No se pudo cargar la imagen." << endl;
+		return -1;
+	}
 
-	//// Convertir a escala de grises
-	//Mat gris;
-	//cvtColor(imagen, gris, COLOR_BGR2GRAY);
+	cv::Mat gray;
+	cv::cvtColor(imagen, gray, cv::COLOR_BGR2GRAY);
 
-	//// Aplicar el detector de bordes
-	//Mat bordes;
-	//Canny(gris, bordes, 100, 200);
+	// Aplicar un umbral para binarizar la imagen
+	cv::Mat thresh;
+	cv::threshold(gray, thresh, 200, 255, cv::THRESH_BINARY_INV); // Ajusta el valor 200 según sea necesario
 
-	//// Encontrar contornos
-	//vector<vector<Point>> contornos;
-	//findContours(bordes, contornos, RETR_TREE, CHAIN_APPROX_SIMPLE);
+	// Encontrar contornos
+	std::vector<std::vector<cv::Point>> contornos;
+	cv::findContours(thresh, contornos, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
 
-	//// Dibujar los contornos que podrían ser botones
-	//for (size_t i = 0; i < contornos.size(); i++) {
-	//	vector<Point> aprox;
-	//	approxPolyDP(contornos[i], aprox, arcLength(contornos[i], true) * 0.02, true);
+	// Dibujar los contornos que podrían ser botones
+	for (size_t i = 0; i < contornos.size(); i++) {
+		vector<Point> aprox;
+		approxPolyDP(contornos[i], aprox, arcLength(contornos[i], true) * 0.02, true);
 
-	//	if (aprox.size() == 4) { // Consideramos que un botón podría ser rectangular
-	//		Rect rect = boundingRect(aprox);
-	//		rectangle(imagen, rect, Scalar(0, 255, 0), 2);  // Dibujar el rectángulo alrededor del botón
-	//		cout << "Coordenadas del botón: " << rect.x << ", " << rect.y
-	//			<< ", ancho: " << rect.width << ", alto: " << rect.height << endl;
-	//	}
-	//}
-
-	//// Mostrar la imagen con el botón detectado
-	//imshow("Imagen con el botón detectado", imagen);
-	//waitKey(0);
+		if (aprox.size() == 4) { // Consideramos que un botón podría ser rectangular
+			Rect rect = boundingRect(aprox);
+			rectangle(imagen, rect, Scalar(0, 255, 0), 2);  // Dibujar el rectángulo alrededor del botón
+			cout << "Coordenadas del boton: " << rect.x << ", " << rect.y
+				<< ", ancho: " << rect.width << ", alto: " << rect.height << endl;
+			_buttons.push_back({ rect.x,rect.y,rect.width,rect.height });
+		}
+	}
+	
 }

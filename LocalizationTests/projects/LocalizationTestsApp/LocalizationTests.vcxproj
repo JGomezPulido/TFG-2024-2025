@@ -146,7 +146,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>/usr/local/lib;/usr/lib;$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>-llept;-ltesseract;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>-llept;-ltesseract;-lopencv_core;-lopencv_imgproc;-lopencv_highgui;-lopencv_imgcodecs;%(AdditionalDependencies)</AdditionalDependencies>
       <LibraryDependencies>%(LibraryDependencies)</LibraryDependencies>
       <AdditionalOptions>-L/usr/local/lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -158,8 +158,8 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>/usr/local/lib;/usr/lib;$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libTestCases.a;%(AdditionalDependencies)</AdditionalDependencies>
-      <LibraryDependencies>lept;tesseract;%(LibraryDependencies)</LibraryDependencies>
+      <AdditionalDependencies>-llept;-ltesseract;-lopencv_core;-lopencv_imgproc;-lopencv_highgui;-lopencv_imgcodecs;%(AdditionalDependencies)</AdditionalDependencies>
+      <LibraryDependencies>%(LibraryDependencies)</LibraryDependencies>
       <AdditionalOptions>-L/usr/local/lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>

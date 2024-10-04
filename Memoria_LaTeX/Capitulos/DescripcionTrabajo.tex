@@ -96,7 +96,7 @@ Durante el desarrollo de este trabajo, se evaluaron varias herramientas de Recon
 	Proporciona gran variedad de modelos entrenados y también ofrece la opción de entrenar tu propio modelo.
 	Se ha realizado la misma prueba de la imagen con esta herramienta (figura \ref{fig:EasyOCR_Test}) , en este caso para facilitar el proceso , se ha utilizado directamente la página demo que proporciona EasyOCR\footnote{\url{https://www.jaided.ai/easyocr/} (Demo de EasyOCR)}
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 			\centering
 			\includegraphics[width = 0.5\textwidth]{Imagenes/OCR/EasyOcr_Test.png}
 			\caption{Resultado de EasyOCR}
@@ -114,6 +114,14 @@ Durante el desarrollo de este trabajo, se evaluaron varias herramientas de Recon
 	El motor puede integrarse fácilmente en aplicaciones de procesamiento de imágenes y visión por computadora. Tesseract se utiliza comúnmente en combinación con bibliotecas como OpenCV para preprocesar imágenes antes de la etapa de reconocimiento, lo que mejora la precisión de los resultados.
 	
 	Además, Tesseract ofrece una API en varios lenguajes de programación, lo que facilita su integración en diferentes entornos de desarrollo y una de ellas es C++ , por lo que esta herramienta cumple con todos los requisitos para nuestro proyecto y es la razón por la que hemos optado por Tesseract.
+	
+	Se ha realizado la misma prueba que las otras herramientas en la figura \ref{fig:Tesseract_Test}
+		\begin{figure}[h]
+		\centering
+		\includegraphics[width = 0.5\textwidth]{Imagenes/OCR/Tesseract_Test.png}
+		\caption{Resultado de Tesseract}
+		\label{fig:Tesseract_Test}
+	\end{figure}
 \end{enumerate}
 \section{Descripción de los tests}
 \subsection{Testing sobre errores de cadena no localizada - detección de placeholder}
@@ -160,9 +168,15 @@ Durante el desarrollo de este trabajo, se evaluaron varias herramientas de Recon
 \begin{itemize}
 	\item Problema: \\
 	Cuando el texto escrito es más largo de lo esperado por el programador por lo que se sale de los límites del espacio guardado para ese texto y se solapan. \\
-	\item Entrada: \\
+	\item Entrada: Imagen\\
 	
-	\item Comportamiento: \\
+	\item Comportamiento: Para resolver este problema se platea usar una ocr para detectar las posiciones de los textos , seguido de una librería gráfica para detectar el contorno de un botón y obtener así sus posiciones. Comparando la posición del texto y la posición del botón obtenemos si el texto se está saliendo del botón o no.\\
+	Para simplificar el test , damos algunas restricciones: 
+	\begin{itemize}
+		\item En la imagen , el texto tiene que aparecer completamente en horizontal sin ninguna rotación sobre el eje x.
+		\item Detectamos de primeras texto que se sobresale por los lados.
+		\item Al ser un botón , tiene que estar resaltado , un claro contraste con el fondo y el texto para facilitar la detección
+	\end{itemize} 
 	
 \end{itemize}
 \subsection{Testing sobre truncamiento de texto

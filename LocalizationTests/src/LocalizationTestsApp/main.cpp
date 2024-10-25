@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 	if (!tests.init(args)) return 1;
 	tests.run();*/
 	std::string volumen = "/home/localizationtests/volumen/overlap/";
-	/*Overlap testCorrect = Overlap();
+	Overlap testCorrect = Overlap();
 	if (!testCorrect.Init(volumen + "C.png")) {
 	std::cout << "fallo test" << std::endl;
 	}
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 	}
 	testFail.getButtons();
 	if (testFail.checkOverlap())std::cout << "OVERLAP!!!!" << std::endl;
-	else std::cout << "EVERYTHING OK" << std::endl;*/
+	else std::cout << "EVERYTHING OK" << std::endl;
 
 	Overlap testMultiFail = Overlap();
 	if (!testMultiFail.Init(volumen + "Multi_Fail.png")) {

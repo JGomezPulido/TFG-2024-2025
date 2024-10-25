@@ -1,1 +1,3 @@
-Archivo 2 
+Empezar jugar
+Salir
+Soy un texto

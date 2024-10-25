@@ -1,0 +1,4 @@
+Empezar jugar
+Salir
+un texto
+Soy

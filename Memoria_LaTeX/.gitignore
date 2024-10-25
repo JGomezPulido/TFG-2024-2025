@@ -1,3 +1,10 @@
 *.pdf
 tmp/
 *.synctex.gz
+*.log
+*.aux
+*.idx
+*.lof
+*.lot
+*.out
+*.toc

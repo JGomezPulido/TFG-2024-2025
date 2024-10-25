@@ -9,7 +9,8 @@ using namespace cv;
 using namespace std;
 Overlap::Overlap()
 {
-	
+	_butMinW = 65;
+	_butMinH = 30;
 }
 
 Overlap::~Overlap()
@@ -35,9 +36,16 @@ bool Overlap::checkOverlap()
 
 		// Verificar si el bounding box se sale de los límites del botón
 		for (int i = 0; i < _boxes.size(); i++) {
-			if (_boxes[i].x < btnX || _boxes[i].x2 > btnRight || _boxes[i].y < btnY || _boxes[i].y2 > btnBottom) {
-				return true;  // El bounding box se sale de los límites
+			// Si la esquina superior izquierda está dentro del botón
+			if(_boxes[i].x > btnX && _boxes[i].x < btnX + btnW && _boxes[i].y > btnY && _boxes[i].y < btnY + btnH) 
+			{
+				// Si se sale a la derecha o hacia abajo
+				if (_boxes[i].x2 > btnRight || _boxes[i].y2 > btnBottom) { 
+					return true;
+				}
 			}
+			// La esquina superior izquierda no está en el botón por lo que se ignora
+
 		}
 	}
 	return false;  // El bounding box está dentro de los límites
@@ -48,7 +56,7 @@ bool Overlap::Init(std::string imageUrl)
 	_imageUrl = imageUrl;
 	//Esto tiene que ir en tesseract
 	_ocr = new tesseract::TessBaseAPI();
-	if (_ocr->Init("/home/trainingFont/trainedModel", "CourierPrime")) {
+	if (_ocr->Init("/home/trainingFont/trainedModel", "Arial")) {
 		std::cout << "fallo Init tess" << std::endl;
 		return false;
 	}
@@ -116,10 +124,19 @@ bool Overlap::getButtons()
 		if (aprox.size() == 4) { // Consideramos que un botón podría ser rectangular
 			Rect rect = boundingRect(aprox);
 			rectangle(imagen, rect, Scalar(0, 255, 0), 2);  // Dibujar el rectángulo alrededor del botón
-			cout << "Coordenadas del boton: " << rect.x << ", " << rect.y
-				<< ", ancho: " << rect.width << ", alto: " << rect.height << endl;
-			_buttons.push_back({ rect.x,rect.y,rect.width,rect.height });
+			//Solo tenemos en cuenta los botones de un tamaño mínimo
+			if (rect.width >= _butMinW && rect.height >= _butMinH) {
+				cout << "Coordenadas del boton: " << rect.x << ", " << rect.y
+					<< ", ancho: " << rect.width << ", alto: " << rect.height << endl;
+				_buttons.push_back({ rect.x,rect.y,rect.width,rect.height });
+			}
+			
 		}
 	}
-	
+}
+
+void Overlap::setMinButtonSize(int w, int h)
+{
+	_butMinH = h;
+	_butMinW = w;
 }

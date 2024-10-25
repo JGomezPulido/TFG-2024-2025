@@ -30,10 +30,12 @@ public:
 	bool checkOverlap();
 	bool Init(std::string imageUrl);
 	bool getButtons();
+	void setMinButtonSize(int w, int h);
 private:
 	std::vector<ButtonLimits> _buttons;
 	std::vector<BoudingBox>_boxes;
 	tesseract::TessBaseAPI* _ocr = nullptr;
 	std::string _imageUrl;
+	int _butMinW, _butMinH;
 };
 #endif

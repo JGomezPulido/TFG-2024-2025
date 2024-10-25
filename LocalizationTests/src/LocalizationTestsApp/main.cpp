@@ -55,8 +55,8 @@ int main(int argc, char *argv[]) {
 	//FontIssue font("Àvila es una ciudad");
 	//font.test("Eavila es una ciudad");
 
-	/*Tesseract tess = Tesseract();
-	tess.trainModel("spa", "Arial", 1000);*/
+	Tesseract tess = Tesseract();
+	tess.trainModel("eng", "Arial", 1000);
 
 	return 0;
 }

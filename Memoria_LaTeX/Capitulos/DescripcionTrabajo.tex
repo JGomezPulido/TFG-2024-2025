@@ -10,7 +10,7 @@ Aquí comienza la descripción del trabajo realizado. Se deben incluir tantos ca
 	\label{fig:sampleImage}
 \end{figure}
 
-Si te sirve de utilidad,  puedes incluir tablas para mostrar resultados, tal como se ve en la tabla \ref{tab:sampleTable}.
+Si te sirve de utilidad, puedes incluir tablas para mostrar resultados, tal como se ve en la tabla \ref{tab:sampleTable}.
 
 
 \begin{table}
@@ -83,18 +83,15 @@ Durante el desarrollo de este trabajo, se evaluaron varias herramientas de Recon
 \end{figure}
 \begin{enumerate}
 	\item \textbf{Ocropus}
-	
 	Es un sistema de OCR basado en redes neuronales con un enfoque modular.
 	Principalmente esta disponible para linux , proporciona diferentes módulos para la binarización , segmentación ,generación del ground-truth y el entreno del modelo.
 	Se ha utilizado la herramienta para reconocer la imagen de prueba pero el resultado fue que no consiguió reconocer ningún texto , por lo que fue descartado ya que las otras alternativas que hablaremos en adelante si que ha conseguido algo.
 	Otras razones por la que esta herramienta fue descartado es que el lenguaje de programación principal con la que trabaja es \emph{python} y en nuestro proyecto trabajamos principalmente con \emph{c++} , además la última actualización de esta librería fue en 16 de Diciembre de 2017\footnote{\url{https://github.com/ocropus-archive/DUP-ocropy} (repositorio github de Ocropus)}
-	
 	\item \textbf{EasyOCR}
-	
 	EasyOCR es una biblioteca de reconocimiento óptico de caracteres (OCR) desarrollada en Python que facilita la extracción de texto de imágenes y documentos. Diseñada con el objetivo de ser fácil de usar y accesible, una de las características de EasyOCR es que es capaz de reconocer texto en más de 80 idiomas y soporta múltiples scripts, lo que la convierte en una herramienta versátil para diversas aplicaciones.
 	La herramienta es fácil de usar (no tienes que hacer tu todo el proceso de binarización , segmentación,...) y ofrece buenos resultados al reconocimiento.
 	Proporciona gran variedad de modelos entrenados y también ofrece la opción de entrenar tu propio modelo.
-	Se ha realizado la misma prueba de la imagen con esta herramienta (figura \ref{fig:EasyOCR_Test}) , en este caso para facilitar el proceso , se ha utilizado directamente la página demo que proporciona EasyOCR\footnote{\url{https://www.jaided.ai/easyocr/} (Demo de EasyOCR)}
+	Se ha realizado la misma prueba de la imagen con esta herramienta (figura \ref{fig:EasyOCR_Test}), en este caso para facilitar el proceso , se ha utilizado directamente la página demo que proporciona EasyOCR\footnote{\url{https://www.jaided.ai/easyocr/} (Demo de EasyOCR)}
 	
 	\begin{figure}[p]
 			\centering
@@ -113,10 +110,10 @@ Durante el desarrollo de este trabajo, se evaluaron varias herramientas de Recon
 	
 	El motor puede integrarse fácilmente en aplicaciones de procesamiento de imágenes y visión por computadora. Tesseract se utiliza comúnmente en combinación con bibliotecas como OpenCV para preprocesar imágenes antes de la etapa de reconocimiento, lo que mejora la precisión de los resultados.
 	
-	Además, Tesseract ofrece una API en varios lenguajes de programación, lo que facilita su integración en diferentes entornos de desarrollo y una de ellas es C++ , por lo que esta herramienta cumple con todos los requisitos para nuestro proyecto y es la razón por la que hemos optado por Tesseract.
+	Además, Tesseract ofrece una API en varios lenguajes de programación, lo que facilita su integración en diferentes entornos de desarrollo y una de ellas es C++, por lo que esta herramienta cumple con todos los requisitos para nuestro proyecto y es la razón por la que hemos optado por Tesseract.
 	
 	Se ha realizado la misma prueba que las otras herramientas en la figura \ref{fig:Tesseract_Test}
-		\begin{figure}[h]
+	\begin{figure}[h]
 		\centering
 		\includegraphics[width = 0.5\textwidth]{Imagenes/OCR/Tesseract_Test.png}
 		\caption{Resultado de Tesseract}

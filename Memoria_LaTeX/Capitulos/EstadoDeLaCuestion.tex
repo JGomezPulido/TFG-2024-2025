@@ -19,50 +19,41 @@ Bibtex es un programa separado de latex, pdflatex o cualquier otra cosa que se u
 La internacionalización es el proceso de preparar un producto para que pueda admitir diferentes idiomas y convenciones culturales sin necesidad de volver a rediseñarse.(Localisation Industry Standards Association)(LISA).
 
 Separación del texto traducible de código fuente: Esto ayuda a que el traductor se centre únicamente en el trabajo de traducción y no tenga que acceder al código fuente.
-print(“Hello World") mal   print(getString(hello\_world)).
 
-Uso de fuentes adecuadas para distintos idiomas: Las fuentes deben mostrar todos los posibles caracteres del idioma seleccionado , el fallo de esto puede conllevar a que en el videojuego no se vea el texto completo.
+Uso de fuentes adecuadas para distintos idiomas: Las fuentes deben mostrar todos los posibles caracteres del idioma seleccionado, el fallo de esto puede conllevar a que en el videojuego no se vea el texto completo.
 
 Uso de la codificación adecuada para distintos idiomas: Es necesario que la codificación pueda interpretar un carácter o símbolo introducido por teclado. Se usa el estándar de Unicode.
 
 Diseño de interfaces adaptables al texto que se debe mostrar: La misma cadena de texto en distintos idiomas traducidos pueden necesitar distintos espacios para mostrarlo en pantalla, esto puede conllevar a un problema a la hora de diseñar la interfaz y el espacio que tiene en el videojuego para mostrar una cadena.
+Se plantean las siguientes posibilidades de solucionar el problema
 
-Se plantea las siguientes posibilidades de solucionar el problema:
--Uso de fuente de ancho variable siempre que sea posible: 
-La fuente elegida afecta mucho a la hora de mostrar más o menos caracteres. Existen las fuentes de ancho fija (todos los caracteres ocupan exactamente el mismo número de píxeles) , fuentes de ancho variable( cada carácter ocupa un determinado número de píxeles).Poner ejemplos.
--Uso de bocadillos , cajas o ventanas de texto adaptables al contenido:El tamaño de las ventanas se adaptará al tamaño de texto que hay dentro.
--Uso de menús y botones con gran espacio o adaptables al contenido:En muchas ocasiones surge el problema de que el texto traducido no quepa en el espacio del botón o del menú , para ello se recomienda que se hagan con espacio suficiente para abordar cualquier posible tamaño de la traducción o que sean adaptables al contenido.
+\begin{itemize}
+\item Uso de fuente de ancho variable siempre que sea posible: La fuente elegida afecta mucho a la hora de mostrar más o menos caracteres. Existen las fuentes de ancho fija (todos los caracteres ocupan exactamente el mismo número de píxeles), fuentes de ancho variable (cada carácter ocupa un determinado número de píxeles). Poner ejemplos.
+\item Uso de bocadillos, cajas o ventanas de texto adaptables al contenido: El tamaño de las ventanas se adaptará al tamaño de texto que hay dentro.
+\item Uso de menús y botones con gran espacio o adaptables al contenido: En muchas ocasiones surge el problema de que el texto traducido no quepa en el espacio del botón o del menú, para ello se recomienda que se hagan con espacio suficiente para abordar cualquier posible tamaño de la traducción o que sean adaptables al contenido.
+\end{itemize}
 
-Uso de etiquetas especiales para marcar género,sexo o número: Un problema a la hora de traducir reside en la concordancia de género , sexo y número en distintos idiomas , un ejemplo es You are so nice se puede traducir como eres muy simpático o eres muy simpática. Por lo tanto es necesario la existencia de un sistema que cambie la palabra según si se trata de un personaje masculino o femenino.
+Uso de etiquetas especiales para marcar género, sexo o número: Un problema a la hora de traducir reside en la concordancia de género, sexo y número en distintos idiomas, un ejemplo es \textit{``You are so nice''} se puede traducir como ``Eres muy simpático'' o ``Eres muy simpática''. Por lo tanto es necesario la existencia de un sistema que cambie la palabra según si se trata de un personaje masculino o femenino.
 
-Facilitación de un mínimo de información contextual : En distintos idiomas puede resultar que la traducción sea diferente dependiendo del contexto , esto el traductor no lo sabe , por lo tanto es necesario un mínimo de información contextual para agilizar el proceso de traducción.
+Facilitación de un mínimo de información contextual: En distintos idiomas puede resultar que la traducción sea diferente dependiendo del contexto, esto el traductor no lo sabe, por lo tanto es necesario un mínimo de información contextual para agilizar el proceso de traducción.
 
-Comprobación cultural de imágenes e iconos : Algunos gestos , imágenes o iconos pueden resultar inapropiados para algunas culturas o religiones hay que tener especial cuidado con la zona de localización.
+Comprobación cultural de imágenes e iconos: Algunos gestos, imágenes o iconos pueden resultar inapropiados para algunas culturas o religiones hay que tener especial cuidado con la zona de localización.
 
 \section{Localización}
 \section{Language Quality Assurance LQA }
 Tipos de Bugs Lingüísticas:
 \begin{itemize}
-	\item Problema de fuente : La fuente utilizada no incluye alguno de los caracteres especiales de un idioma , por ejemplo las tildes (á) , la ñ en español.
-	\item Implementación de texto incorrecta : Sucede cuando el texto debería aparecer en un idioma , aparece en un idioma diferente. Puede suceder por un descuido del desarrollador.
-	
-	\item Cadena no localizada : 
-	Tiene lugar cuando la cadena de texto no viene traducida en el juego , puede deberse a un fallo del desarrollador.
-	
+	\item Problema de fuente: La fuente utilizada no incluye alguno de los caracteres especiales de un idioma, por ejemplo las tildes (á), la ñ en español.
+	\item Implementación de texto incorrecta: Sucede cuando el texto debería aparecer en un idioma, aparece en un idioma diferente. Puede suceder por un descuido del desarrollador.
+	\item Cadena no localizada: Tiene lugar cuando la cadena de texto no viene traducida en el juego, puede deberse a un fallo del desarrollador.
 	\item Error tipográfico
 	\item Error gramatical
-	\item Error de traducción : Cuando el texto traducido no tiene el mismo significado que el texto original , o que no tiene sentido en ese contexto
-	
-	\item Solapamiento de texto : Cuando el texto escrito es más largo de lo esperado por el programador por lo que se sale de los límites del espacio guardado para ese texto y se solapan. 
-	
-	
-	\item Texto truncado : Contrario al solapamiento de texto , el texto no se muestra de forma completa.
-	
-	
+	\item Error de traducción: Cuando el texto traducido no tiene el mismo significado que el texto original, o que no tiene sentido en ese contexto
+	\item Solapamiento de texto: Cuando el texto escrito es más largo de lo esperado por el programador por lo que se sale de los límites del espacio guardado para ese texto y se solapan. 
+	\item Texto truncado: Contrario al solapamiento de texto, el texto no se muestra de forma completa.
 	\item Error terminológico
 	\item Incoherencia
-	\item Incumplimiento de instrucciones : Tiene que ver con no seguir unas instrucciones del proyecto , por ejemplo en el mundo de las consolas , un tipo de error tiene que escribirse de una forma en concreta, saltarse esa norma supone retrasos en la aprobación del producto.
-	
+	\item Incumplimiento de instrucciones: Tiene que ver con no seguir unas instrucciones del proyecto, por ejemplo en el mundo de las consolas, un tipo de error tiene que escribirse de una forma en concreta, saltarse esa norma supone retrasos en la aprobación del producto.
 	\item Error de estilo
 	\item Error subtítulos
 	\item Error de audio

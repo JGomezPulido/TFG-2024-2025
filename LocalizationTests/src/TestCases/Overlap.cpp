@@ -80,8 +80,8 @@ bool Overlap::Init(std::string imageUrl)
 			float conf = ri->Confidence(level);
 			int x1, y1, x2, y2;
 			ri->BoundingBox(level, &x1, &y1, &x2, &y2);
-			std::cout << "Word: '" << word << "' at (" << x1 << ", " << y1 << ") -> ("
-				<< x2 << ", " << y2 << "), Confidence: " << conf << "\n";
+			/*std::cout << "Word: '" << word << "' at (" << x1 << ", " << y1 << ") -> ("
+				<< x2 << ", " << y2 << "), Confidence: " << conf << "\n";*/
 			_boxes.push_back({ x1, y1, x2, y2 });
 			delete[] word;
 

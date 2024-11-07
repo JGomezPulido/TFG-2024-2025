@@ -1,0 +1,7 @@
+HP
+SP
+0000
+STASIS CHAMBER:
+...
+...
+OFFLINE

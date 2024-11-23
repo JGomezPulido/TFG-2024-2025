@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\TestCases\BadlyImplemented.h" />
     <ClInclude Include="..\..\src\TestCases\FontIssue.h" />
+    <ClInclude Include="..\..\src\TestCases\Levenshtein.h" />
     <ClInclude Include="..\..\src\TestCases\Overlap.h" />
     <ClInclude Include="..\..\src\TestCases\TestsAssert.h" />
     <ClInclude Include="..\..\src\TestCases\TestCase.h" />
@@ -132,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\TestCases\BadlyImplemented.cpp" />
     <ClCompile Include="..\..\src\TestCases\FontIssue.cpp" />
+    <ClCompile Include="..\..\src\TestCases\Levenshtein.cpp" />
     <ClCompile Include="..\..\src\TestCases\Overlap.cpp" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">

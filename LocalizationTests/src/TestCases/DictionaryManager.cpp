@@ -29,7 +29,7 @@ bool DictionaryManager::setup()
 
 nuspell::Dictionary& DictionaryManager::getDict(Language lan)
 {
-	// TODO: Insertar una instrucción "return" aquí
+	return dictionaries[lan];
 }
 
 nuspell::Dictionary DictionaryManager::loadDict(Language lan, const std::string& dictStem)

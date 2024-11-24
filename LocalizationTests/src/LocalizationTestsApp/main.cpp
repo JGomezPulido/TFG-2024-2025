@@ -16,6 +16,7 @@
 #include "Levenshtein.h"
 
 #include "DictionaryManager.h"
+#include "OrthographicError.h"
 
 std::string readGT(const std::string& rutaArchivo) {
 	std::ifstream archivo(rutaArchivo, std::ios::in | std::ios::binary);
@@ -81,9 +82,13 @@ int main(int argc, char *argv[]) {
 	FontIssue f = FontIssue("¿Hola qué tal?");
 	f.test("\ufffdHola qu\ufffd tal?");
 
+	
 	DictionaryManager dictMan;
 	if (dictMan.setup())
 		std::cout << "Dictionaries found" << std::endl;
+
+	OrtographicError o = OrtographicError(dictMan.getDict(DictionaryManager::Language::Spanish));
+	o.test("Hoala soy yo");
 
 	std::string volumen = "/home/localizationtests/volumen/";
 	

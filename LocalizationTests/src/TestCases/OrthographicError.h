@@ -9,9 +9,14 @@ public:
 		ES
 	};
 public:
-	OrtographicError(Language lan);
+	OrtographicError(nuspell::Dictionary& lan) : dict(lan) {}
+
+	void test(const std::string& testString) override;
 	
 private:
-	nuspell::Dictionary dict;
+	nuspell::Dictionary& dict;
 	
+
+
+
 };

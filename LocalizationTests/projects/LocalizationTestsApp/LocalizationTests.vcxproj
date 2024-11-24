@@ -143,10 +143,11 @@
     <ClCompile>
       <AdditionalIncludeDirectories>/usr/local/include/opencv4;$(SolutionDir)src\OCR;$(SolutionDir)src\TestCases;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-llept -ltesseract %(AdditionalOptions)</AdditionalOptions>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>/usr/local/lib;/usr/lib;$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>-llept;-ltesseract;-lopencv_core;-lopencv_imgproc;-lopencv_highgui;-lopencv_imgcodecs;-lopencv_photo;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>/usr/local/lib;/usr/lib;$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>-llept;-ltesseract;-lopencv_core;-lopencv_imgproc;-lopencv_highgui;-lopencv_imgcodecs;-lopencv_photo;-lnuspell;-licuuc;-lnuspell;%(AdditionalDependencies)</AdditionalDependencies>
       <LibraryDependencies>%(LibraryDependencies)</LibraryDependencies>
       <AdditionalOptions>-L/usr/local/lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
@@ -155,10 +156,11 @@
     <ClCompile>
       <AdditionalIncludeDirectories>/usr/local/include/opencv4;$(SolutionDir)src\OCR;$(SolutionDir)src\TestCases;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-llept -ltesseract %(AdditionalOptions)</AdditionalOptions>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>/usr/local/lib;/usr/lib;$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>-llept;-ltesseract;-lopencv_core;-lopencv_imgproc;-lopencv_highgui;-lopencv_imgcodecs;-lopencv_photo;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>-llept;-ltesseract;-lopencv_core;-lopencv_imgproc;-lopencv_highgui;-lopencv_imgcodecs;-lopencv_photo;-lnuspell;-licuuc;%(AdditionalDependencies)</AdditionalDependencies>
       <LibraryDependencies>%(LibraryDependencies)</LibraryDependencies>
       <AdditionalOptions>-L/usr/local/lib %(AdditionalOptions)</AdditionalOptions>
     </Link>

@@ -1,5 +1,5 @@
 #include "Levenshtein.h"
-#include <math.h>
+#include <cmath>
 #include <algorithm>
 
 using namespace std;

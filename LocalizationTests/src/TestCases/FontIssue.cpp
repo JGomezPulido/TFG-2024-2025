@@ -8,11 +8,12 @@
 //El test compara ambas strings caracter a caracter, si encuentra una similaridad <= 90% o un replacement character (carácter no reconocido), falla 
 void FontIssue::test(const std::string& testString)
 {
-	auto end_it = utf8::find_invalid(_expected.begin(), _expected.end());
-	if (end_it != _expected.end()) {
+
+	if (utf8::find_invalid(_expected.begin(), _expected.end()) != _expected.end()) {
 		std::cout << "Error on Font issue test: expected string not valid utf-8" << std::endl;
 		return;
 	}
+
 	if (utf8::find_invalid(testString.begin(), testString.end()) != testString.end()) {
 		std::cout << "Error on Font issue test: tested string not valid utf-8" << std::endl;
 		return;

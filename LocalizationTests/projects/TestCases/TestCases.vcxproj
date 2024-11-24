@@ -163,14 +163,14 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Lib />
     <ClCompile>
-      <AdditionalIncludeDirectories>$(RemoteRootDir)/TestCases;/usr/include/tesseract;/usr/local/include/opencv4;/usr/include/leptonica;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\TestCases;/usr/include/tesseract;/usr/local/include/opencv4;/usr/include/leptonica;%(ClCompile.AdditionalIncludeDirectories);$(SolutionDir)dep/utfcpp/source</AdditionalIncludeDirectories>
       <AdditionalOptions>-llept -ltesseract %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Lib />
     <ClCompile>
-      <AdditionalIncludeDirectories>$(RemoteRootDir)/TestCases;/usr/include/tesseract;/usr/local/include/opencv4;/usr/include/leptonica;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dep/utfcpp/source;$(RemoteRootDir)/TestCases;/usr/include/tesseract;/usr/local/include/opencv4;/usr/include/leptonica;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-llept -ltesseract %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>

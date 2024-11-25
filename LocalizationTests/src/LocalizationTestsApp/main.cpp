@@ -160,11 +160,11 @@ int main(int argc, char *argv[]) {
 				return -1;
 			}*/
 
-			//cv::adaptiveThreshold(image, image, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C, cv::THRESH_BINARY, 11, 2);
-			//if (!cv::imwrite(imagesavepath + "/" + std::to_string(i) + "4.png", image)) {
-			//	std::cerr << "Error al guardar la imagen " << std::endl;
-			//	return -1;
-			//}
+			/*cv::adaptiveThreshold(image, image, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C, cv::THRESH_BINARY, 11, 2);
+			if (!cv::imwrite(imagesavepath + "/" + std::to_string(i) + "4.png", image)) {
+				std::cerr << "Error al guardar la imagen " << std::endl;
+				return -1;
+			}*/
 
 			//// Equalización del histograma
 			//cv::equalizeHist(image, image);
@@ -190,9 +190,9 @@ int main(int argc, char *argv[]) {
 			// // Corrección gamma
 			//cv::Mat gammaCorregida = corregirGamma(image, 1.5);
 
-			//// aplicar enfoque
-			//cv::Mat kernel2 = (cv::Mat_<float>(3, 3) << -1, -1, -1, -1, 9, -1, -1, -1, -1);
-			//cv::filter2D(image, image, -1, kernel2);
+			// aplicar filtro de nitidez
+			cv::Mat kernel2 = (cv::Mat_<float>(3, 3) << -1, -1, -1, -1, 9, -1, -1, -1, -1);
+			cv::filter2D(image, image, -1, kernel2);
 
 			_ocr->SetImage(image.data, image.cols, image.rows, 1, image.step);
 			char* outText = _ocr->GetUTF8Text();

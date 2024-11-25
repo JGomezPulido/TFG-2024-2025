@@ -14,6 +14,9 @@
 #include <regex>
 
 #include "Levenshtein.h"
+
+#include "DictionaryManager.h"
+
 std::string readGT(const std::string& rutaArchivo) {
 	std::ifstream archivo(rutaArchivo, std::ios::in | std::ios::binary);
 	if (!archivo) {
@@ -74,6 +77,13 @@ std::string cleanTesseractOutput(const std::string& tesseractOutput,
 	return cleanedOutput;
 }
 int main(int argc, char *argv[]) {
+
+	FontIssue f = FontIssue("¿Hola qué tal?");
+	f.test("\ufffdHola qu\ufffd tal?");
+
+	DictionaryManager dictMan;
+	if (dictMan.setup())
+		std::cout << "Dictionaries found" << std::endl;
 
 	std::string volumen = "/home/localizationtests/volumen/";
 	

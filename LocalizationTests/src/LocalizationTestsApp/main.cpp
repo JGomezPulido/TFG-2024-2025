@@ -36,45 +36,70 @@ std::string readGT(const std::string& rutaArchivo) {
 	return contenido;
 }
 // Función para limpiar la salida de Tesseract
-std::string cleanTesseractOutput(const std::string& tesseractOutput,
-	const std::string& expectedOutput,
-	double similarityThreshold) {
-	std::vector<std::string> tesseractWords;
-	std::vector<std::string> expectedWords;
-	std::string cleanedOutput;
+//std::string cleanTesseractOutput(const std::string& tesseractOutput,
+//	const std::string& expectedOutput,
+//	double similarityThreshold) {
+//	std::vector<std::string> tesseractWords;
+//	std::vector<std::string> expectedWords;
+//	std::string cleanedOutput;
+//
+//	// Dividir la salida en palabras
+//	std::istringstream tessStream(tesseractOutput);
+//	std::string word;
+//	while (tessStream >> word) {
+//		tesseractWords.push_back(word);
+//	}
+//
+//	std::istringstream expStream(expectedOutput);
+//	while (expStream >> word) {
+//		expectedWords.push_back(word);
+//	}
+//
+//	// Comparar cada palabra de la salida de Tesseract con la mejor coincidencia esperada
+//	for (const auto& tessWord : tesseractWords) {
+//		double bestSimilarity = 0.0;
+//		for (const auto& expWord : expectedWords) {
+//			int distance = Levenshtein::levenshteinDist(tessWord, expWord);
+//			double similarity = 1.0 - (double)distance / std::max(expWord.size(), tessWord.size());
+//			bestSimilarity = std::max(bestSimilarity, similarity);
+//		}
+//		// Verificar si la palabra cumple con el umbral de similitud
+//		if (bestSimilarity >= similarityThreshold) {
+//			cleanedOutput += tessWord + " ";
+//		}
+//	}
+//
+//	// Eliminar el último espacio extra
+//	if (!cleanedOutput.empty()) {
+//		cleanedOutput.pop_back();
+//	}
+//
+//	return cleanedOutput;
+//}
+// Función para encontrar la línea más similar dentro de un umbral
+std::string findMostSimilarLine(const std::string& target, const std::vector<std::string>& recognizedLines, double threshold) {
+	double maxSimilarity = 0.0;
+	std::string bestMatch;
 
-	// Dividir la salida en palabras
-	std::istringstream tessStream(tesseractOutput);
-	std::string word;
-	while (tessStream >> word) {
-		tesseractWords.push_back(word);
-	}
-
-	std::istringstream expStream(expectedOutput);
-	while (expStream >> word) {
-		expectedWords.push_back(word);
-	}
-
-	// Comparar cada palabra de la salida de Tesseract con la mejor coincidencia esperada
-	for (const auto& tessWord : tesseractWords) {
-		double bestSimilarity = 0.0;
-		for (const auto& expWord : expectedWords) {
-			int distance = Levenshtein::levenshteinDist(tessWord, expWord);
-			double similarity = 1.0 - (double)distance / std::max(expWord.size(), tessWord.size());
-			bestSimilarity = std::max(bestSimilarity, similarity);
+	for (const auto& line : recognizedLines) {
+		int distance = Levenshtein::levenshteinDist(target, line);
+		double similarity = 1.0 - (double)distance / std::max(target.size(), line.size());
+		if (similarity > maxSimilarity && similarity >= threshold) {
+			maxSimilarity = similarity;
+			bestMatch = line;
 		}
-		// Verificar si la palabra cumple con el umbral de similitud
-		if (bestSimilarity >= similarityThreshold) {
-			cleanedOutput += tessWord + " ";
-		}
 	}
 
-	// Eliminar el último espacio extra
-	if (!cleanedOutput.empty()) {
-		cleanedOutput.pop_back();
+	return bestMatch;
+}
+std::vector<std::string> splitIntoLines(const std::string& text) {
+	std::vector<std::string> lines;
+	std::istringstream stream(text);
+	std::string line;
+	while (std::getline(stream, line)) {
+		lines.push_back(line);
 	}
-
-	return cleanedOutput;
+	return lines;
 }
 int main(int argc, char *argv[]) {
 
@@ -201,8 +226,8 @@ int main(int argc, char *argv[]) {
 			//cv::Mat gammaCorregida = corregirGamma(image, 1.5);
 
 			// aplicar filtro de nitidez
-			cv::Mat kernel2 = (cv::Mat_<float>(3, 3) << -1, -1, -1, -1, 9, -1, -1, -1, -1);
-			cv::filter2D(image, image, -1, kernel2);
+		/*	cv::Mat kernel2 = (cv::Mat_<float>(3, 3) << -1, -1, -1, -1, 9, -1, -1, -1, -1);
+			cv::filter2D(image, image, -1, kernel2);*/
 
 			_ocr->SetImage(image.data, image.cols, image.rows, 1, image.step);
 			char* outText = _ocr->GetUTF8Text();
@@ -226,7 +251,15 @@ int main(int argc, char *argv[]) {
 				return -1;
 			}*/
 			std::string expected = readGT(gtName);
-			std::string cleanOutPut = cleanTesseractOutput(outText, expected, 0.7);
+			std::vector<std::string> expectedLines = splitIntoLines(expected);
+			std::vector<std::string> outputLines =  splitIntoLines(outText);
+			std::string cleanOutPut;
+			for (const auto& expectedLine : expectedLines) {
+				std::string bestMatch = findMostSimilarLine(expectedLine, outputLines, 0.8);
+				if (!bestMatch.empty()) {
+					cleanOutPut += bestMatch + "\n";
+				}
+			}
 			std::ofstream outFile(savepath + "/" + std::to_string(i) + ".txt");
 			if (outFile.is_open()) {
 				outFile << cleanOutPut;

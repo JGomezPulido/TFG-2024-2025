@@ -90,10 +90,12 @@
     <OutDir>$(ProjectDir)lib\</OutDir>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\OCR\Levenshtein.cpp" />
     <ClCompile Include="..\..\src\OCR\OCR.cpp" />
     <ClCompile Include="..\..\src\OCR\Tesseract.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\OCR\Levenshtein.h" />
     <ClInclude Include="..\..\src\OCR\OCR.h" />
     <ClInclude Include="..\..\src\OCR\Tesseract.h" />
   </ItemGroup>

@@ -9,7 +9,6 @@
 #include <leptonica/allheaders.h>
 #include <opencv2/opencv.hpp>
 #include <tesseract/baseapi.h>
-#include <fstream>
 #include <opencv2/photo.hpp>
 #include <regex>
 
@@ -18,65 +17,7 @@
 #include "DictionaryManager.h"
 #include "OrthographicError.h"
 
-std::string readGT(const std::string& rutaArchivo) {
-	std::ifstream archivo(rutaArchivo, std::ios::in | std::ios::binary);
-	if (!archivo) {
-		throw std::runtime_error("No se pudo abrir el archivo: " + rutaArchivo);
-	}
 
-	// Mover el puntero al final para determinar el tamaño
-	archivo.seekg(0, std::ios::end);
-	std::streamsize tamano = archivo.tellg();
-	archivo.seekg(0, std::ios::beg);
-
-	// Reservar espacio y leer todo el contenido
-	std::string contenido(tamano, '\0');
-	archivo.read(&contenido[0], tamano);
-	archivo.close();
-
-	return contenido;
-}
-// Función para limpiar la salida de Tesseract
-std::string cleanTesseractOutput(const std::string& tesseractOutput,
-	const std::string& expectedOutput,
-	double similarityThreshold) {
-	std::vector<std::string> tesseractWords;
-	std::vector<std::string> expectedWords;
-	std::string cleanedOutput;
-
-	// Dividir la salida en palabras
-	std::istringstream tessStream(tesseractOutput);
-	std::string word;
-	while (tessStream >> word) {
-		tesseractWords.push_back(word);
-	}
-
-	std::istringstream expStream(expectedOutput);
-	while (expStream >> word) {
-		expectedWords.push_back(word);
-	}
-
-	// Comparar cada palabra de la salida de Tesseract con la mejor coincidencia esperada
-	for (const auto& tessWord : tesseractWords) {
-		double bestSimilarity = 0.0;
-		for (const auto& expWord : expectedWords) {
-			int distance = Levenshtein::levenshteinDist(tessWord, expWord);
-			double similarity = 1.0 - (double)distance / std::max(expWord.size(), tessWord.size());
-			bestSimilarity = std::max(bestSimilarity, similarity);
-		}
-		// Verificar si la palabra cumple con el umbral de similitud
-		if (bestSimilarity >= similarityThreshold) {
-			cleanedOutput += tessWord + " ";
-		}
-	}
-
-	// Eliminar el último espacio extra
-	if (!cleanedOutput.empty()) {
-		cleanedOutput.pop_back();
-	}
-
-	return cleanedOutput;
-}
 int main(int argc, char *argv[]) {
 
 	FontIssue f = FontIssue("¿Hola qué tal?");
@@ -248,7 +189,6 @@ int main(int argc, char *argv[]) {
 	}
 	
 	
-	_ocr->End();
 
 	return 0;
 }

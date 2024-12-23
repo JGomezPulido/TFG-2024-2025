@@ -59,3 +59,47 @@ Tipos de Bugs Lingüísticas:
 	\item Error de audio
 	\item Problemas culturales
 \end{itemize}
+
+\section{Reconocimiento Óptico de Caracteres (OCR)}
+El OCR (Reconocimiento Óptico de Caracteres, por sus siglas en inglés Optical Character Recognition) es una tecnología que convierte imágenes de texto manuscrito, impreso o mecanografiado en datos de texto que las computadoras pueden interpretar y manipular , en otras palabras , puede extraer el texto contenida en una imagen.
+
+Para llegar al objetivo de reconocer el texto y extraerlo de la imagen el OCR da una serie de pasos:
+\begin{enumerate}
+	\item \textbf{Preprocesamiento de la imagen:}
+	
+	El propósito de este paso es procesar la imagen para que sea más legible para la computadora ,reconocer así de forma mas eficiente los textos.
+	\begin{itemize}
+		\item Conversión a escala de grises: La mayoría de los OCR primero convierten la imagen en blanco y negro o escala de grises para simplificar el procesamiento.
+		\item Reducción de ruido: Se aplican filtros para eliminar manchas, borrones o marcas en la imagen que puedan afectar la precisión del reconocimiento.
+		\item Binarización: La imagen se convierte a una representación en blanco y negro, donde los píxeles se clasifican como parte del fondo (blanco) o del texto (negro). Este proceso ayuda a aislar los caracteres.
+	\end{itemize}
+	
+	\item \textbf{Segmentación:}
+	
+	El OCR divide la imagen en secciones manejables, primero separa líneas de texto, luego separa las palabras y finalmente descompone las palabras en caracteres individuales.Este paso es crucial, ya que el OCR necesita reconocer los caracteres de manera individual, pero considerando también su contexto dentro de una palabra o frase.
+	
+	\item \textbf{Detección de características:}
+	
+	Extracción de características de los caracteres: El OCR analiza los caracteres y sus formas, midiendo varios atributos como las líneas, contornos, cruces de líneas, y la disposición de los píxeles. Estos datos son usados para diferenciar letras, números y símbolos similares (como ``O'' y ``0'' o ``l'' y ``1'').
+	Se aplican técnicas basadas en modelos geométricos, estructuras de redes neuronales o de aprendizaje automático para identificar patrones comunes en los caracteres.
+	
+	\item \textbf{Reconocimiento del carácter:}
+	
+	Clasificación de los caracteres: Una vez identificadas las características, el OCR las compara con una base de datos o ``alfabeto'' interno de posibles caracteres. Esto puede hacerse de varias maneras, dependiendo del tipo de OCR:
+	\begin{itemize}
+		\item Métodos basados en plantillas: Se compara cada carácter con un conjunto de plantillas predefinidas. Si la forma del carácter coincide con una plantilla, se clasifica como ese carácter.
+		\item Métodos basados en aprendizaje automático o redes neuronales: Las técnicas modernas de OCR suelen usar redes neuronales entrenadas con miles de ejemplos de texto. El sistema ``aprende'' a identificar caracteres y a hacer distinciones más sutiles en base a sus experiencias pasadas.
+	\end{itemize}
+	\item \textbf{Post-procesamiento:}
+	
+	\begin{itemize}
+		\item Corrección de errores: Una vez que el OCR ha reconocido los caracteres, puede haber errores, especialmente si el texto es borroso o está en una fuente inusual. Por lo tanto, muchos OCR incluyen un corrector ortográfico o usan diccionarios para identificar palabras que no tienen sentido y corregirlas basándose en el contexto.
+		\item Reconstrucción del formato: Algunos OCR también intentan mantener el formato original del documento, incluyendo aspectos como la disposición de las columnas, el tipo de letra, negritas, subrayados, etc.
+		
+	\end{itemize}
+	\item \textbf{Conversión a texto:}
+	
+	Una vez que se han identificado todos los caracteres, el OCR genera una salida de texto editable, que se puede guardar en un archivo o ser exportado a otros formatos como PDF o documento de Word.
+	
+	
+\end{enumerate}

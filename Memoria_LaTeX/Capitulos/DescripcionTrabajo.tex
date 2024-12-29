@@ -422,81 +422,45 @@ Obteniendo estos nuevos resultados en el CER medio:
 	\end{tabular}
 \end{table}
 \section{Descripción de los tests}
-\subsection{Testing sobre errores de cadena no localizada - detección de placeholder}
+A continuación haremos una selección de los bugs presentados en la Sección \ref{bugs}, y explicaremos las razones por las que los hemos seleccionado, además de las restricciones y redefiniciones que haremos sobre ellos nuestra herramienta.
+
+Hemos seguido dos razonamientos principales a la hora de seleccionar los errores a evaluar por nuestra herramienta.
 \begin{itemize}
-	\item Problema: \\
-	Sucede cuando el texto incluye placeholders de variables p.ej \{name\}  \\
-	\item Entrada: \\
-	Cadena leída por el detector de texto \\
-	Marcadores de placeholder \\
-	\item Comportamiento: \\
-	El test asume que los marcadores de placeholder no se usan de manera natural en el lenguaje escrito.
-	Lo que hará el test es leer la string de entrada y contar el número de caracteres hasta que aparezca un marcador de inicio de placeholder. En ese momento se guardará el número de caracteres hasta esa primera aparición, y después guardará la string que aparece de ese momento hasta que se encuentre un marcador de cierre de placeholder. 
-	Al final, el test escribirá en pantalla el número del carácter en el que empieza cada placeholder y la cadena de texto que haya dentro de dicho placeholder.
+	\item El error ha de tener que ver con texto y su representación, para que este pueda ser recogido por la herramienta de OCR y procesado. Por lo tanto, quedan descartados los errores que tengan que ver con audio o gráficos. (Errores \ref{ErrorSubtitulos}, \ref{ErrorAudio} y \ref{ErrorCultura})
+	\item El error no ha de requerir información sobre el contexto del videojuego, por lo tanto, quedan descartados los errores que tengan que ver con el uso correcto del lenguaje o el estilo de escritura. (Errores \ref{ErrorTraducción}, \ref{ErrorTermino} y \ref{ErrorDirectrices})
 \end{itemize}
 
-\subsection{Testing sobre problema de fuente
-}
+Siguiendo este razonamiento, hemos escogido los siguientes errores para que nuestra herramienta los evalúe:
+
+\subsection{Evaluación sobre problema de fuente (Error \ref{ErrorFuente})}
+Para evaluar este error, se comprobará que el texto no contiene ningún carácter como los de la Figura \ref{Notdef}, además de comprobar que los caracteres del texto esperado y el reconocido coinciden, pues este error también se puede manifestar, por ejemplo, eliminando signos extraños de letras, como puede ser cambiando una ``Ñ'' por una ``N''
+
+\subsection{Testing sobre idioma incorrecto}
+Debido a la ambigüedad entre las definiciones de los errores de ``Implementación Incorrecta'' y ´´Cadena no Localizada'' (\ref{ErrorNoLocalizada} y \ref{ErrorImpIncorrecta}), dado que ambas se refieren a la representación de un texto en un idioma incorrecto, hemos decidido combinarlas en una sola prueba. En esta prueba comprobaremos que el texto reconocido por el OCR está en el mismo idioma que el especificado por el usuario en la configuración de la prueba.
+
+\subsection{Testing sobre solapamiento de texto (Error \ref{ErrorSolapamiento})}
+Para resolver este problema se plantea usar el OCR para detectar las posiciones de los textos, seguido de una librería gráfica para detectar el contorno de la caja delimitadora guardado para ese texto, y obtener así sus posiciones. Comparando la posición del texto y la posición de la caja delimitadora obtenemos si el texto se está saliendo de la caja o no.
+	
+Para simplificar el test, damos algunas restricciones: 
 \begin{itemize}
-	\item Problema: \\
-	La fuente utilizada no incluye alguno de los caracteres especiales de un idioma , por ejemplo las tildes (á) , la ñ en español.  \\
-	\item Entrada: \\
-	Cadena leída por el detector de texto
+	\item En la imagen, el texto tiene que aparecer completamente en horizontal sin ninguna rotación sobre el eje X.
+	\item Detectamos texto que sobresale por los lados.
+	\item Al ser un botón, tiene que estar resaltado y tener un claro contraste con el fondo y el texto para facilitar la detección
+	\item Debe tener una forma de caja o ventana(cuadriculada, cuadriculada redondeada), no sirve, por ejemplo, un bocadillo en forma de nube.
+\end{itemize} 
 	
-	Cadena de texto esperado
-	
-	\item Comportamiento: \\
-	El test leerá la cadena de texto leída por el detector y las compara uno a uno con la cadena de texto esperado , se guardará la posición en la que son distintos y se mostrará en la salida el número de caracteres distintos y su posición.
-	
-\end{itemize}
+\subsection{Testing sobre detección de placeholders}
+Este es un error que no hemos definido previamente, pero es un error que hemos experimentado y hemos decidido evaluarlo. Este error ocurre cuando, por algún error de implementación, aparecen placeholders de localización en vez del texto traducido. Dado que es un error de implementación, se podría clasificar como un Error de ``Implementación Incorrecta'' (\ref{ErrorImpIncorrecta}).
 
+Para evaluarlo, comprobamos la cadena de texto en busca de los caracteres de placeholder, bajo la asunción de que estos no son utilizados como parte del lenguaje natural.
 
+\subsection{Testing sobre truncamiento de texto (Error \ref{ErrorTruncamiento})}
+Para evaluar este error, comprobaremos la longitud de la cadena reconocida contra la longitud de la cadena esperada, y las longitudes de las subcadenas más largas. 
 
-\subsection{Testing sobre cadena de texto no localizada}
-\begin{itemize}
-	\item Problema: \\
+\subsection{Testing sobre error tipográfico (Error \ref{ErrorTypo})}
+TBD
 
-	\item Entrada: \\
-
-	\item Comportamiento: \\
-
-\end{itemize}
-\subsection{Testing sobre solapamiento de texto}
-
-\begin{itemize}
-	\item Problema: \\
-	Cuando el texto escrito es más largo de lo esperado por el programador por lo que se sale de los límites del espacio guardado para ese texto y se solapan. \\
-	\item Entrada: Imagen\\
-	
-	\item Comportamiento: Para resolver este problema se platea usar el OCR para detectar las posiciones de los textos , seguido de una librería gráfica para detectar el contorno de la caja delimitadora guardado para ese texto, y obtener así sus posiciones. Comparando la posición del texto y la posición de la caja delimitadora obtenemos si el texto se está saliendo de la caja o no.\\
-	Para simplificar el test , damos algunas restricciones: 
-	\begin{itemize}
-		\item En la imagen , el texto tiene que aparecer completamente en horizontal sin ninguna rotación sobre el eje x.
-		\item Detectamos de primeras texto que se sobresale por los lados.
-		\item Al ser un botón , tiene que estar resaltado , un claro contraste con el fondo y el texto para facilitar la detección
-		\item Debe tener una forma de caja o ventana(cuadriculada, cuadriculada redondeada), no vale por ejemplo un bocadillo en forma de nube.
-	\end{itemize} 
-	
-\end{itemize}
-\subsection{Testing sobre truncamiento de texto
-}
-\begin{itemize}
-	\item Problema: \\
-	
-	\item Entrada: \\
-	
-	\item Comportamiento: \\
-	
-\end{itemize}
-\subsection{Testing sobre error tipográfico/gramatical
-}
-\begin{itemize}
-	\item Problema: \\
-	
-	\item Entrada: \\
-	
-	\item Comportamiento: \\
-	
-\end{itemize}
+\subsection{Testing sobre error gramatical (Error \ref{ErrorGramatical})}
+TBD
  
 

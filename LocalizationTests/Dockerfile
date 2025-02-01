@@ -29,10 +29,12 @@ RUN apt-get install libpango1.0-dev -y
 RUN apt-get install libcairo2-dev -y 
 RUN apt-get install libleptonica-dev -y
 RUN apt-get install nlohmann-json3-dev -y
+RUN apt-get install libspdlog-dev -y
 RUN apt-get install catch2 pandoc -y
-RUN apt-get install libtesseract-dev -y
+RUN apt-get update && apt-get install -y libtesseract-dev
 RUN apt-get install tesseract-ocr -y
 RUN apt-get install -y tesseract-ocr-spa
+RUN apt-get install -y tesseract-ocr-eng
 RUN apt-get install git -y
 RUN apt-get install hunspell-es -y
 RUN apt-get install hunspell-en-us -y

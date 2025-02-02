@@ -9,6 +9,7 @@ ENV REPOS_PATH  /home/tesseract_repos
 ENV NUSPELL /home/nuspell
 ENV CV2 /home/opencv
 ENV DEP ${TESTDIR}/dep
+ENV UTF8 ${DEP}/utfcpp
 
 # install build dependencies 
 RUN apt-get update && apt-get install -y g++ rsync zip openssh-server make gdb
@@ -134,6 +135,6 @@ RUN useradd -m -d ${TESTDIR} -s /bin/bash -G sudo ${USERNAME}
 RUN usermod -aG sudo ${USERNAME}
 RUN echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-
 RUN mkdir ${DEP}
-RUN git clone https://github.com/nemtrif/utfcpp $DEP --branch v4.0.6
+RUN mkdir ${UTF8}
+RUN git clone https://github.com/nemtrif/utfcpp $UTF8 --branch v4.0.6

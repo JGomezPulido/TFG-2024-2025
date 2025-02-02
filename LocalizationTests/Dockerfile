@@ -8,6 +8,7 @@ ENV TESTDIR /home/${USERNAME}
 ENV REPOS_PATH  /home/tesseract_repos
 ENV NUSPELL /home/nuspell
 ENV CV2 /home/opencv
+ENV DEP ${TESTDIR}/dep
 
 # install build dependencies 
 RUN apt-get update && apt-get install -y g++ rsync zip openssh-server make gdb
@@ -51,6 +52,7 @@ RUN cmake ..
 RUN make -j
 RUN sudo make install 
 
+
 #install cv2
 RUN mkdir $CV2
 RUN git clone https://github.com/opencv/opencv $CV2
@@ -63,6 +65,7 @@ RUN cd $CV2/build
 RUN cmake ..
 RUN make -j4
 RUN sudo make install
+
 
 #Python libraries 
 RUN apt-get install python3.11 python3.11-dev -y
@@ -132,3 +135,5 @@ RUN usermod -aG sudo ${USERNAME}
 RUN echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 
+RUN mkdir ${DEP}
+RUN git clone https://github.com/nemtrif/utfcpp $DEP --branch v4.0.6

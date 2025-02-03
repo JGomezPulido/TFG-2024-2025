@@ -1,0 +1,9 @@
+{
+    "imagePath": "/ruta/a/imagenes/",
+    "gtPath": "/ruta/a/groundtruth/",
+    "model": "eng",
+    "modelPath": "tessdata_best/spa.traineddata",
+    "outputPath":"",
+    "OCR":"Tesseract",
+    "simbolos_placeholders": ["#", "@", "_"]
+}

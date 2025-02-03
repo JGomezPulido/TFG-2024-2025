@@ -5,11 +5,34 @@
 #include <vector>
 #include <dirent.h>
 #include <cstring>
+#include <tesseract/baseapi.h>
+#include <leptonica/allheaders.h>
 
-bool Tesseract::getText(std::string imgPath ,std::string model)
+
+bool Tesseract::init(std::string modelPath, std::string font)
 {
-    //Eliminar espacios
-    model.erase(std::remove_if(model.begin(), model.end(), ::isspace), model.end());
+    font.erase(std::remove_if(font.begin(), font.end(), ::isspace), font.end());
+    _ocr = new tesseract::TessBaseAPI();
+    	if (_ocr->Init(modelPath.c_str(), font.c_str())) {
+    		std::cout << "fallo Init tess" << std::endl;
+    		return false;
+    }
+        return true;
+}
+
+void Tesseract::release()
+{
+    if (_ocr != nullptr)
+        _ocr->End();
+}
+
+bool Tesseract::getDirImgText(std::string imgPath, std::string outputPath)
+{
+    	//Creación de carpetas de resultados
+	std::string command = "sudo mkdir -p "+outputPath;
+	std::system(command.c_str());
+	command = "sudo chmod 777 "+outputPath;
+	std::system(command.c_str());
 
     std::vector<std::string> pngFiles;
     DIR* dir;
@@ -33,17 +56,49 @@ bool Tesseract::getText(std::string imgPath ,std::string model)
         // Muestra un mensaje de error si el directorio no se puede abrir
         std::cerr << "No se pudo abrir el directorio: " << imgPath << std::endl;
     }
-    //const char* output_file = "output.log";
+    //Procesamiento de cada imagen
     for (int i = 0; i < pngFiles.size(); i++) {
-        std::string command = "sudo tesseract " + imgPath + "/" + pngFiles[i] + " " + imgPath + "/" + pngFiles[i] + " --tessdata-dir " + tessdatadir + " -l " + model;
-        //std::string command = "sudo tesseract " + imgPath + "/" + pngFiles[i] + " stdout --tessdata-dir " + tessdatadir + " -l " + model +" > " + std::string(output_file);
-        system(command.c_str());
-        //std::ifstream output_stream(output_file);
-        //std::string output_message((std::istreambuf_iterator<char>(output_stream)), std::istreambuf_iterator<char>());
-        //output_stream.close();
-        //std::cout << output_message << std::endl;
+        imageInfo image;
+        preprocessing(imgPath+"/" + pngFiles[i], image);
+        _ocr->SetImage(image.data, image.cols, image.rows, 1, image.step);
+        char* outText = _ocr->GetUTF8Text();
+        std::string gtName;
+        if (gtName != "") {
+            std::string expected = readGT(gtName);
+            std::vector<std::string> expectedLines = splitIntoLines(expected);
+            std::vector<std::string> outputLines = splitIntoLines(outText);
+            std::string cleanOutPut;
+            for (const auto& expectedLine : expectedLines) {
+                std::string bestMatch = findMostSimilarLine(expectedLine, outputLines, 0.8);
+                if (!bestMatch.empty()) {
+                    cleanOutPut += bestMatch + "\n";
+                }
+            }
+            std::ofstream outFile(outputPath + "/" + std::to_string(i) + ".txt");
+            if (outFile.is_open()) {
+                outFile << cleanOutPut;
+                outFile.close();
+                std::cout << "Texto guardado" << std::endl;
+            }
+            else {
+                std::cerr << "No se pudo abrir el archivo para escribir" << std::endl;
+            }
+        }
+        else {
+            std::ofstream outFile(outputPath + "/" + std::to_string(i) + ".txt");
+            if (outFile.is_open()) {
+                outFile << outText;
+                outFile.close();
+                std::cout << "Texto guardado" << std::endl;
+            }
+            else {
+                std::cerr << "No se pudo abrir el archivo para escribir" << std::endl;
+            }
+        }
+        	//Liberar recursos
+        delete[] outText;
+        delete image.data;
     }
-    //std::remove(output_file);
     return false;
 }
 bool Tesseract::trainModel(std::string lan, std::string font, int iteration, bool clear)
@@ -159,5 +214,6 @@ bool Tesseract::generateGT(std::string lan, std::string font)
     }
    
 }
+
 
 

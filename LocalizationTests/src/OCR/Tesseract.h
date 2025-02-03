@@ -2,11 +2,18 @@
 #ifndef TESSERACT_H
 #define TESSERACT_H
 #include "OCR.h"
-class Tesseract
+namespace tesseract {
+	class TessBaseAPI;
+}
+class Tesseract : public OCR
 {
 public:
-	bool getText(std::string imgPath, std::string model);
-	bool trainModel(std::string lan, std::string font, int iteration,bool clear=false);
+	Tesseract() {};
+	~Tesseract() {};
+	bool init(std::string modelPath, std::string font)override;
+	void release() override;
+	bool getDirImgText(std::string imgPath, std::string outputPath) override;
+	bool trainModel(std::string lan, std::string font, int iteration,bool clear=false) override;
 private:
 	const std::string trainFolder = "/home/trainingFont";
 	const std::string groundTruth = "python3 " + trainFolder + "/ground_truth_exec.py";
@@ -14,6 +21,7 @@ private:
 	const std::string tessdatadir = trainFolder + "/trainedModel";
 	bool generateGT(std::string lan, std::string font);
 	bool train(std::string lan, std::string font, int iteration, bool clear = false);
+	tesseract::TessBaseAPI* _ocr = nullptr;
 };
 
 #endif

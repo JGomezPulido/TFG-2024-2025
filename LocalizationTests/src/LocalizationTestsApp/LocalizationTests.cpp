@@ -29,21 +29,20 @@ void LocalizationTests::run()
 				std::cout << "yes\n";
 			}
 			else std::cout << "no\n";
-			//tess.getText("/home/images", "Courier Prime");
 			break;
 		}
 		case State::TESTING:
 		{
-			PlaceholderVector placeholders = PlaceholderVector();
-			placeholders.push_back({ '{','}' });
-			BadlyImplemented tests = BadlyImplemented(placeholders);
-			initTime_ = std::chrono::system_clock::now();
-			tests.test("Hola de buenas");
-			printTime();
-			tests.test("Hola {name}, que tal estas {laugh}");
-			printTime();
-			tests.test("Hola {name{player1}}");
-			printTime();
+			//PlaceholderVector placeholders = PlaceholderVector();
+			//placeholders.push_back({ '{','}' });
+			//BadlyImplemented tests = BadlyImplemented(placeholders);
+			//initTime_ = std::chrono::system_clock::now();
+			//tests.test("Hola de buenas");
+			//printTime();
+			//tests.test("Hola {name}, que tal estas {laugh}");
+			//printTime();
+			//tests.test("Hola {name{player1}}");
+			//printTime();
 			break;
 		}
 		default:

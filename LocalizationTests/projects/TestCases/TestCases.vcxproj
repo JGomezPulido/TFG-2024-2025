@@ -173,7 +173,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Lib />
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)dep/utfcpp/source;$(RemoteRootDir)/TestCases;/usr/include/tesseract;/usr/local/include/opencv4;/home/nuspell/src;/usr/include/leptonica;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\OCR;$(SolutionDir)src\TestCases;/usr/include/tesseract;/usr/local/include/opencv4;/usr/include/leptonica;%(ClCompile.AdditionalIncludeDirectories);$(SolutionDir)dep/utfcpp/source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-llept -ltesseract %(AdditionalOptions)</AdditionalOptions>
       <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>

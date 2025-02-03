@@ -1,9 +1,9 @@
 {
-    "imagePath": "/ruta/a/imagenes/",
-    "gtPath": "/ruta/a/groundtruth/",
+    "imagePath": "/home/images/",
+    "gtPath": "/home/images/",
     "model": "eng",
     "modelPath": "tessdata_best/spa.traineddata",
     "outputPath":"",
     "OCR":"Tesseract",
-    "simbolos_placeholders": ["#", "@", "_"]
+    "placeholders": ["#", "@", "_"]
 }

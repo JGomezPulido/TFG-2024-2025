@@ -21,8 +21,26 @@ int main(int argc, char *argv[]) {
 
 	/*FontIssue f = FontIssue("¿Hola qué tal?");
 	f.test("\ufffdHola qu\ufffd tal?");*/
-	spdlog::info("Welcome to spdlog!");
 
+
+	spdlog::info("Welcome to spdlog!");
+	
+	//Para testear paso de argumentos
+	std::vector<std::vector<std::string>> testCases = {
+		{"program", "--test"},
+		{"program", "--test", "-c", "/home/localizationtests/volumen/config.json"},
+		{"program", "--train", "-f", "Arial", "-l", "eng"},
+		{"program", "--train", "-f", "Arial", "-l", "eng", "-i", "50"},
+		{"program", "--train", "-f", "Arial", "-l", "eng", "-i", "100", "--clear"},
+		{"program", "--train", "-f", "Arial", "-l", "eng", "--clear"},
+		{"program", "--train", "-f", "Arial", "-l", "eng", "-i", "abc"} // Caso con error
+	};
+
+	LocalizationTests* test = new LocalizationTests();
+	test->init(testCases[0]);
+	test->run();
+	test->release();
+	delete test;
 
 	DictionaryManager dictMan;
 	if (dictMan.setup())

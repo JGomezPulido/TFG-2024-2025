@@ -39,9 +39,6 @@
     <ClCompile Include="..\..\src\LocalizationTestsApp\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OCR\OCR.vcxproj">
-      <Project>{ae18f8be-bbb1-4050-a8fa-d0a86a7bc9be}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\TestCases\TestCases.vcxproj">
       <Project>{567f12f8-6449-40e8-8d50-ce3834121d51}</Project>
     </ProjectReference>

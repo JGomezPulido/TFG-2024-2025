@@ -1,0 +1,4 @@
+All progress ageter the last save will be lost.
+Are you sure you want to exit?
+Yes 
+No

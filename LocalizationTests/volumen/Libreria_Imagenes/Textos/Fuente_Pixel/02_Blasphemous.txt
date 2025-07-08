@@ -1,0 +1,3 @@
+Biliary Flasks
+Press F to consume one of your Biliary Flasks and recover vitality.
+These consecrated flasks are refilled by kneeling in a Prie Dieu. Find empty vessels to increase the amount you can carry.
